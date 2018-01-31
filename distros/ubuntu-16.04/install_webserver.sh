@@ -8,11 +8,15 @@ InstallWebServer() {
 	echo -n "Installing Apache and Modules... "
 	echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 	# - DISABLED DUE TO A BUG IN DBCONFIG - echo "phpmyadmin phpmyadmin/dbconfig-install boolean false" | debconf-set-selections
+	apt-get install apt-transport-https lsb-release ca-certificates
+	wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+	echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/php.list
+	apt-get update
 	echo "dbconfig-common dbconfig-common/dbconfig-install boolean false" | debconf-set-selections
-	apt-get -yqq install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fastcgi libapache2-mod-fcgid apache2-suexec-pristine libapache2-mod-python php7.0-fpm libruby > /dev/null 2>&1
+	apt-get -yqq install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fastcgi libapache2-mod-fcgid apache2-suexec-pristine libapache2-mod-python php7.1-fpm libruby > /dev/null 2>&1
 	echo -e "[${green}DONE${NC}]\n"
 	echo -n "Installing PHP and Modules... "
-	apt-get -yqq install php7.0 php7.0-common php7.0-gd php7.0-dev php7.0-mysqlnd php7.0-imap php7.0-cli php7.0-cgi php-pear php-auth php7.0-mcrypt php7.0-curl php7.0-intl php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl php-memcached php-imagick php-gettext php7.0-zip php7.0-mbstring php7.0-opcache php-apcu php7.0-bz2 php-redis > /dev/null 2>&1
+	apt-get -yqq install php7.1 php7.1-common php7.1-gd php7.1-dev php7.1-mysqlnd php7.1-imap php7.1-cli php7.1-cgi php-pear php-auth php7.1-mcrypt php7.1-curl php7.1-intl php7.1-pspell php7.1-recode php7.1-sqlite3 php7.1-tidy php7.1-xmlrpc php7.1-xsl php-memcached php-imagick php-gettext php7.1-zip php7.1-mbstring php7.1-opcache php-apcu php7.1-bz2 php-redis > /dev/null 2>&1
 	echo -e "[${green}DONE${NC}]\n"
 
 	
