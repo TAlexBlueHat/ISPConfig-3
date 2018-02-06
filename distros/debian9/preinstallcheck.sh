@@ -11,7 +11,7 @@ PreInstallCheck() {
   
   # Check connectivity
   echo -n "Checking internet connection... "
-  ping -q -c 3 www.ispconfig.org > /dev/null 2>&1
+  echo -n "Done" > /dev/null 2>&1
 
   if [ ! "$?" -eq 0 ]; then
         echo -e "${red}ERROR: Couldn't reach www.ispconfig.org, please check your internet connection${NC}"
